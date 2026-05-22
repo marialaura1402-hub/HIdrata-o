@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidratação no Futebol de Várzea</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a7c3e;
+    --verde-claro: #2ecc71;
+    --verde-neon: #00ff7f;
+    --amarelo: #f5c518;
+    --laranja: #e8721c;
+    --vermelho: #d63031;
+    --azul: #0984e3;
+    --azul-agua: #74b9ff;
+    --branco: #f8f9fa;
+    --cinza-escuro: #1a1a2e;
+    --cinza: #2d3436;
+    --grama: #16a34a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cinza-escuro);
+    font-family: 'Barlow', sans-serif;
+    color: var(--branco);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0f2027, #1a7c3e 50%, #0f2027);
+    position: relative;
+    padding: 48px 24px 36px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.03) 60px,
+      rgba(255,255,255,0.03) 61px
+    ), repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.03) 60px,
+      rgba(255,255,255,0.03) 61px
+    );
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--amarelo);
+    color: var(--cinza-escuro);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(42px, 10vw, 80px);
+    line-height: 1;
+    letter-spacing: 2px;
+    color: var(--branco);
+  }
+  .hero h1 span {
+    color: var(--verde-neon);
+  }
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px;
+  }
+  .ball-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* STAT BANNER */
+  .stat-banner {
+    background: var(--amarelo);
+    color: var(--cinza-escuro);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .stat-banner .icon { font-size: 28px; flex-shrink: 0; }
+  .stat-banner p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .stat-banner strong { font-size: 18px; }
+
+  /* SECTIONS */
+  .section {
+    padding: 32px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 26px;
+    letter-spacing: 1px;
+  }
+
+  /* WATER PERSON */
+  .water-visual {
+    background: linear-gradient(180deg, rgba(9,132,227,0.15), transparent);
+    border: 1px solid rgba(116,185,255,0.3);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .body-figure {
+    position: relative;
+    width: 80px;
+    height: 160px;
+    margin: 0 auto 16px;
+  }
+  .body-figure svg { width: 100%; height: 100%; }
+  .water-percent {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 64px;
+    color: var(--azul-agua);
+    line-height: 1;
+  }
+  .water-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .card {
+    border-radius: 12px;
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: currentColor;
+  }
+  .card-verde { background: rgba(26,124,62,0.25); border: 1px solid rgba(46,204,113,0.3); }
+  .card-azul { background: rgba(9,132,227,0.2); border: 1px solid rgba(116,185,255,0.3); }
+  .card-amarelo { background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3); }
+  .card-laranja { background: rgba(232,114,28,0.2); border: 1px solid rgba(232,114,28,0.3); }
+  .card-icon { font-size: 24px; margin-bottom: 8px; }
+  .card-value {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--verde-neon);
+  }
+  .card-azul .card-value { color: var(--azul-agua); }
+  .card-amarelo .card-value { color: var(--amarelo); }
+  .card-laranja .card-value { color: var(--laranja); }
+  .card-desc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+  .timeline-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 56px;
+    flex-shrink: 0;
+  }
+  .timeline-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .timeline-line {
+    width: 2px;
+    flex: 1;
+    min-height: 12px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 auto;
+  }
+  .timeline-item:last-child .timeline-line { display: none; }
+  .timeline-content {
+    flex: 1;
+    padding: 4px 0 24px 12px;
+  }
+  .timeline-phase {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .timeline-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.75);
+  }
+  .timeline-highlight {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-top: 8px;
+    border-left: 3px solid;
+  }
+  .antes .timeline-dot { background: rgba(9,132,227,0.3); border: 2px solid var(--azul); }
+  .antes .timeline-phase { color: var(--azul-agua); }
+  .antes .timeline-highlight { border-color: var(--azul); color: var(--azul-agua); }
+  .durante .timeline-dot { background: rgba(46,204,113,0.2); border: 2px solid var(--verde-claro); }
+  .durante .timeline-phase { color: var(--verde-neon); }
+  .durante .timeline-highlight { border-color: var(--verde-claro); color: var(--verde-neon); }
+  .apos .timeline-dot { background: rgba(232,114,28,0.2); border: 2px solid var(--laranja); }
+  .apos .timeline-phase { color: var(--laranja); }
+  .apos .timeline-highlight { border-color: var(--laranja); color: var(--laranja); }
+
+  /* SINAIS */
+  .sinais-grid { display: flex; flex-direction: column; gap: 8px; }
+  .sinal-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid;
+  }
+  .sinal-grave { border-color: var(--vermelho); }
+  .sinal-moderado { border-color: var(--laranja); }
+  .sinal-leve { border-color: var(--amarelo); }
+  .sinal-icon { font-size: 22px; flex-shrink: 0; }
+  .sinal-info {}
+  .sinal-nivel {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .sinal-grave .sinal-nivel { color: var(--vermelho); }
+  .sinal-moderado .sinal-nivel { color: var(--laranja); }
+  .sinal-leve .sinal-nivel { color: var(--amarelo); }
+  .sinal-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.4;
+  }
+
+  /* URINA */
+  .urina-section { margin-top: 16px; }
+  .urina-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+  }
+  .urina-bar {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 36px;
+    gap: 2px;
+  }
+  .urina-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-size: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    position: relative;
+  }
+  .u1 { background: #fff9c4; color: #333; }
+  .u2 { background: #ffd54f; color: #333; }
+  .u3 { background: #ffb300; color: #333; }
+  .u4 { background: #e65100; color: white; }
+  .u5 { background: #8d0000; color: white; }
+  .urina-labels {
+    display: flex;
+    margin-top: 6px;
+  }
+  .urina-label-item {
+    flex: 1;
+    text-align: center;
+    font-size: 9px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .urina-ok { color: var(--verde-neon) !important; }
+
+  /* ISOTÔNICO */
+  .drink-box {
+    background: linear-gradient(135deg, rgba(26,124,62,0.2), rgba(9,132,227,0.15));
+    border: 1px solid rgba(46,204,113,0.25);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 0;
+  }
+  .drink-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--verde-neon);
+    margin-bottom: 12px;
+  }
+  .drink-items { display: flex; flex-direction: column; gap: 8px; }
+  .drink-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+  .drink-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--verde-neon);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* ALERTA */
+  .alerta-box {
+    background: linear-gradient(135deg, rgba(214,48,49,0.2), rgba(214,48,49,0.05));
+    border: 1px solid rgba(214,48,49,0.4);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 0;
+  }
+  .alerta-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--vermelho);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alerta-items { display: flex; flex-direction: column; gap: 8px; }
+  .alerta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+  .alerta-bullet {
+    color: var(--vermelho);
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* DICA SIMPLES */
+  .tip-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .tip-card {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .tip-emoji { font-size: 28px; margin-bottom: 6px; }
+  .tip-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    text-align: center;
+  }
+  .footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+  .footer strong { color: rgba(255,255,255,0.6); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(46,204,113,0.3), transparent);
+    margin: 4px 0;
+  }
+
+  /* BG dots */
+  .section:nth-child(odd) {
+    background: rgba(255,255,255,0.01);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="ball-icon">⚽</div>
+  <div class="hero-badge">Baseado na Diretriz ABNE • 2025</div>
+  <h1>HIDRATAÇÃO<br>NO <span>FUTEBOL</span></h1>
+  <div class="hero-sub">Guia para Atletas</div>
+</div>
+
+<!-- STAT BANNER -->
+<div class="stat-banner">
+  <div class="icon">💧</div>
+  <p>O corpo humano é composto por <strong>~60% de água</strong> — manter esse equilíbrio é essencial para jogar bem e com segurança.</p>
+</div>
+
+<!-- SECTION 1: Por que importa -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(116,185,255,0.15);">🧠</div>
+    <div class="section-title" style="color:var(--azul-agua)">POR QUE IMPORTA?</div>
+  </div>
+
+  <div class="water-visual">
+    <div class="water-percent">2%</div>
+    <div class="water-label">de perda de água corporal</div>
+    <div style="margin-top:10px; font-size:13px; color:rgba(255,255,255,0.7); line-height:1.5;">já começa a afetar seu <strong style="color:var(--amarelo)">desempenho físico</strong> e causa a sensação de sede — para um jogador de 70 kg, isso equivale a apenas <strong style="color:var(--amarelo)">1,4 kg</strong></div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card card-vermelho" style="background:rgba(214,48,49,0.15);border:1px solid rgba(214,48,49,0.3);">
+      <div class="card-icon">🏃</div>
+      <div class="card-value" style="color:#ff7675;">-2,4%</div>
+      <div class="card-desc">Queda no desempenho aeróbio</div>
+    </div>
+    <div class="card card-laranja">
+      <div class="card-icon">🌡️</div>
+      <div class="card-value">8%</div>
+      <div class="card-desc">Risco de parada cardíaca</div>
+    </div>
+    <div class="card card-azul">
+      <div class="card-icon">🧊</div>
+      <div class="card-value" style="color:var(--azul-agua);">↑</div>
+      <div class="card-desc">Temperatura corporal mais alta</div>
+    </div>
+    <div class="card card-amarelo">
+      <div class="card-icon">🦵</div>
+      <div class="card-value">Câibras</div>
+      <div class="card-desc">Desequilíbrio eletrolítico</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 2: Estratégia -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(46,204,113,0.15);">📋</div>
+    <div class="section-title" style="color:var(--verde-neon)">ESTRATÉGIA DE HIDRATAÇÃO</div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item antes">
+      <div class="timeline-left">
+        <div class="timeline-dot">🕐</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Antes do jogo</div>
+        <div class="timeline-title">CHEGUE HIDRATADO</div>
+        <div class="timeline-text">Beba líquidos suficientes nas horas anteriores. Mantenha urina clara e frequente ao longo do dia. Inicie a partida sem sensação de sede.</div>
+        <div class="timeline-highlight">5 a 10 mL de água/kg corporal — 2 a 4 horas antes</div>
+      </div>
+    </div>
+
+    <div class="timeline-item durante">
+      <div class="timeline-left">
+        <div class="timeline-dot">⚡</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Durante o jogo</div>
+        <div class="timeline-title">BEBA COM REGULARIDADE</div>
+        <div class="timeline-text">Não espere sentir sede — quando isso acontece, já há queda de rendimento. O estômago processa cerca de 1 L de líquido por hora.</div>
+        <div class="timeline-highlight">100–200 mL a cada 15 min • ou 2–3 mL/kg</div>
+      </div>
+    </div>
+
+    <div class="timeline-item apos">
+      <div class="timeline-left">
+        <div class="timeline-dot">🔄</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Após o jogo</div>
+        <div class="timeline-title">REPONHA A PERDA</div>
+        <div class="timeline-text">Pese-se antes e depois. Para cada 1 kg perdido, repor 1 L de água. As perdas hídricas durante uma partida podem passar de 3 L.</div>
+        <div class="timeline-highlight">1 L de líquido por kg de peso perdido</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 3: O que beber -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(46,204,113,0.15);">🥤</div>
+    <div class="section-title" style="color:var(--verde-claro)">O QUE BEBER?</div>
+  </div>
+
+  <div class="drink-box">
+    <div class="drink-title">✅ Exercícios acima de 60 minutos</div>
+    <div class="drink-items">
+      <div class="drink-item"><div class="drink-bullet"></div><span>Use <strong>isotônicos</strong> para reduzir risco de hiponatremia (sódio baixo no sangue) &lt;135 mmol/L</span></div>
+      <div class="drink-item"><div class="drink-bullet"></div><span>O sódio na bebida melhora palatabilidade, previne hiponatremia e acelera absorção de glicose</span></div>
+      <div class="drink-item"><div class="drink-bullet"></div><span>Bebidas com carboidratos + eletrólitos são indicadas para partidas longas ou duplas rodadas</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;" class="drink-box" style="background:rgba(9,132,227,0.1);border-color:rgba(116,185,255,0.3);">
+    <div class="drink-title" style="color:var(--azul-agua);">💧 Exercícios até 60 minutos</div>
+    <div class="drink-items">
+      <div class="drink-item"><div class="drink-bullet" style="background:var(--azul-agua);"></div><span><strong>Água</strong> é suficiente para jogos curtos ou treinos leves</span></div>
+      <div class="drink-item"><div class="drink-bullet" style="background:var(--azul-agua);"></div><span>Evite água pura em excesso durante exercícios longos — risco de hiponatremia</span></div>
+    </div>
+  </div>
+
+  <div class="tip-row">
+    <div class="tip-card">
+      <div class="tip-emoji">🌡️</div>
+      <div class="tip-text">Calor intenso = mais suor = mais reposição</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-emoji">👀</div>
+      <div class="tip-text">Monitore a cor da urina</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-emoji">⚖️</div>
+      <div class="tip-text">Pese antes e após o treino</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 4: Cor da urina -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,197,24,0.1);">🔍</div>
+    <div class="section-title" style="color:var(--amarelo)">VERIFIQUE SUA URINA</div>
+  </div>
+  <p style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:14px;line-height:1.5;">O controle da cor e frequência urinária ao longo do dia é um método simples, gratuito e eficaz de avaliar a hidratação.</p>
+  <div class="urina-bar">
+    <div class="urina-seg u1">1</div>
+    <div class="urina-seg u2">2</div>
+    <div class="urina-seg u3">3</div>
+    <div class="urina-seg u4">4</div>
+    <div class="urina-seg u5">5</div>
+  </div>
+  <div class="urina-labels">
+    <div class="urina-label-item urina-ok">Bem<br>hidratado</div>
+    <div class="urina-label-item urina-ok">Bom</div>
+    <div class="urina-label-item" style="color:var(--amarelo);">Atenção:<br>beba mais</div>
+    <div class="urina-label-item" style="color:var(--laranja);">Desidra-<br>tação</div>
+    <div class="urina-label-item" style="color:var(--vermelho);">Grave</div>
+  </div>
+  <div style="margin-top:12px;background:rgba(0,255,127,0.07);border-radius:10px;padding:12px;border:1px solid rgba(0,255,127,0.2);font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;">
+    🎯 <strong style="color:var(--verde-neon);">Meta:</strong> Manter urina clara (tons 1–2), com frequência regular ao longo do dia, e massa corporal variando <strong>menos de 1%</strong> entre os dias.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 5: Sinais de alerta -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(214,48,49,0.15);">🚨</div>
+    <div class="section-title" style="color:#ff7675">SINAIS DE ALERTA</div>
+  </div>
+
+  <div class="sinais-grid">
+    <div class="sinal-item sinal-grave">
+      <div class="sinal-icon">💀</div>
+      <div class="sinal-info">
+        <div class="sinal-nivel">⚠️ Grave — perda &gt;8%</div>
+        <div class="sinal-text">Sangue mais viscoso, risco de parada cardíaca ("morte súbita"). Saia do jogo imediatamente.</div>
+      </div>
+    </div>
+    <div class="sinal-item sinal-moderado">
+      <div class="sinal-icon">😵</div>
+      <div class="sinal-info">
+        <div class="sinal-nivel">⚠️ Moderado-grave — &gt;6%</div>
+        <div class="sinal-text">Tontura, fraqueza, dificuldade de respirar, espasmos musculares, delírio</div>
+      </div>
+    </div>
+    <div class="sinal-item sinal-moderado">
+      <div class="sinal-icon">🤢</div>
+      <div class="sinal-info">
+        <div class="sinal-nivel">Moderado</div>
+        <div class="sinal-text">Náuseas, redução da concentração, piora da termorregulação, volume sanguíneo reduzido</div>
+      </div>
+    </div>
+    <div class="sinal-item sinal-leve">
+      <div class="sinal-icon">😓</div>
+      <div class="sinal-info">
+        <div class="sinal-nivel">Leve — &gt;2%</div>
+        <div class="sinal-text">Sede, desconforto, perda de apetite — já indica redução do desempenho</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 6: O que NÃO fazer -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(214,48,49,0.15);">🚫</div>
+    <div class="section-title" style="color:#ff7675">NÃO FAÇA ISSO</div>
+  </div>
+  <div class="alerta-box">
+    <div class="alerta-title">⛔ Práticas perigosas</div>
+    <div class="alerta-items">
+      <div class="alerta-item"><div class="alerta-bullet">✕</div><span>Treinar com roupas de plástico ou em sauna para "perder peso" — aumenta risco de morte</span></div>
+      <div class="alerta-item"><div class="alerta-bullet">✕</div><span>Tomar diuréticos ou laxantes para perder água antes da competição</span></div>
+      <div class="alerta-item"><div class="alerta-bullet">✕</div><span>Beber água pura em excesso durante exercícios longos — risco de hiponatremia</span></div>
+      <div class="alerta-item"><div class="alerta-bullet">✕</div><span>Esperar sentir sede para começar a se hidratar — quando isso ocorre, já há impacto no rendimento</span></div>
+      <div class="alerta-item"><div class="alerta-bullet">✕</div><span>Iniciar o jogo já desidratado — comum entre atletas amadores e associado a maiores riscos</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Fonte: Diretrizes Clínicas de Nutrição Esportiva — ABNE (2025)</strong><br>
+  Quaresma et al. J. Phys. Educ. v. 36, e3605, 2025<br><br>
+  Este infográfico tem caráter educativo. Para orientação individualizada,<br>consulte um nutricionista esportivo.</p>
+</div>
+
+</body>
+</html>
